@@ -26,7 +26,7 @@ const FilterScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     getImageFromNavigation()
-  })
+  },[])
 
   const getImageFromNavigation = () => {
     if (route?.params?.imageData) {
@@ -54,9 +54,8 @@ const FilterScreen = ({ navigation, route }) => {
     }
   };
 
-
   const renderFilterComponent = ({ item, index }) => {
-    const FilterComponent = item.filterComponent;
+    const FilterComponent = item?.filterComponent;
     const image = (
       <Image
         style={styles.filterSelector}
@@ -66,13 +65,13 @@ const FilterScreen = ({ navigation, route }) => {
     );
     return (
       <TouchableOpacity onPress={() => onSelectFilter(index)}>
-        <Text style={styles.filterTitle}>{item.title}</Text>
+        <Text style={styles.filterTitle}>{item?.title}</Text>
         <FilterComponent image={image} />
       </TouchableOpacity>
     );
   };
 
-  const SelectedFilterComponent = FILTERS[selectedFilterIndex].filterComponent;
+  const SelectedFilterComponent = FILTERS?.[selectedFilterIndex]?.filterComponent;
 
   return (
     <>
@@ -92,7 +91,7 @@ const FilterScreen = ({ navigation, route }) => {
                 source={{ uri: thumbnail?.uri }}
                 resizeMode='contain'
               />
-            ) : Object.keys(thumbnail).length && (
+            ) : Object.keys(thumbnail)?.length && (
               <SelectedFilterComponent
                 onExtractImage={onExtractImage}
                 extractImageEnabled={true}
@@ -107,7 +106,7 @@ const FilterScreen = ({ navigation, route }) => {
             )}
             <FlatList
               data={FILTERS}
-              keyExtractor={item => item.title}
+              keyExtractor={item => item?.title}
               showsHorizontalScrollIndicator={false}
               horizontal={true}
               renderItem={renderFilterComponent}
