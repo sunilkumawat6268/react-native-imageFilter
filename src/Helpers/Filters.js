@@ -26,6 +26,8 @@ import {
     WillowCompat,
     Xpro2Compat,
   } from 'react-native-image-filter-kit'; 
+
+
   export const FILTERS = [
     {
       title: 'Normal',
